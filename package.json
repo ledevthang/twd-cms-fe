@@ -1,0 +1,52 @@
+{
+  "name": "vite-typescript-basic",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --mode development",
+    "staging": "vite --mode staging",
+    "main": "vite --mode production",
+    "build:dev": "tsc && vite build --mode development ",
+    "build:staging": "tsc && vite build --mode staging",
+    "build:main": "tsc && vite build --mode production",
+    "preview": "vite preview",
+    "format": "prettier --write \"**/*.+(ts|tsx|json|css|md)\"",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@tanstack/react-query": "^4.29.25",
+    "@tanstack/react-query-devtools": "^4.29.25",
+    "axios": "^1.4.0",
+    "chart.js": "^4.3.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "primeflex": "^3.3.1",
+    "primeicons": "^6.0.1",
+    "primereact": "^9.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.2",
+    "react-redux": "^8.1.1",
+    "react-router-dom": "^6.14.2",
+    "react-spinners": "^0.13.8"
+  },
+  "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^4.29.25",
+    "@types/lodash": "^4.14.195",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "@vitejs/plugin-react": "latest",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.0.0",
+    "sass": "^1.63.6",
+    "typescript": "latest",
+    "vite": "latest"
+  }
+}
