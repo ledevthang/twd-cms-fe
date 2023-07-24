@@ -17,5 +17,4 @@ export interface LoginFormTypes {
   username: string;
   password: string;
   confirmPassword?: string;
-  check?: boolean;
 }

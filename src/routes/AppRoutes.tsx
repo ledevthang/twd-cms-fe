@@ -15,6 +15,7 @@ import { AppLayout } from '@/layout';
 import ChartPage from '@/pages/Charts';
 import AccessDeniedPage from '@/pages/AccessDenied';
 import DataTable from '@/pages/DataTable';
+import UserPage from '@/pages/UserPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,10 +25,11 @@ const router = createBrowserRouter(
         element={
           <>
             <AppLayout />
-            <Navigate to={ApiRoutesEnum.crud} replace={true} />
+            <Navigate to={ApiRoutesEnum.user} replace={true} />
           </>
         }
       >
+        <Route path={ApiRoutesEnum.user} element={<UserPage />} />
         <Route path={ApiRoutesEnum.crud} element={<CrudPage />} />
         <Route path={ApiRoutesEnum.table} element={<DataTable />} />
         <Route path={ApiRoutesEnum.chart} element={<ChartPage />} />

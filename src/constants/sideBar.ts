@@ -5,6 +5,11 @@ export const model: AppMenuItem[] = [
     label: 'Menu 1',
     items: [
       {
+        label: 'User',
+        icon: 'pi pi-fw pi-users',
+        to: '/user'
+      },
+      {
         label: 'Crud',
         icon: 'pi pi-fw pi-pencil',
         to: '/crud'

@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useRef } from 'react';
-import { Checkbox } from 'primereact/checkbox';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
 import { InputText } from 'primereact/inputtext';
@@ -34,8 +33,7 @@ const Sign = ({ type }: SignProps) => {
     defaultValues: {
       username: '',
       password: '',
-      confirmPassword: '',
-      check: false
+      confirmPassword: ''
     },
     mode: 'onSubmit',
     reValidateMode: 'onChange'
@@ -229,39 +227,6 @@ const Sign = ({ type }: SignProps) => {
                 />
               ) : null}
 
-              <div className='flex align-items-center justify-content-between mb-5 gap-5'>
-                {type === 'login' ? (
-                  <Controller
-                    name='check'
-                    control={control}
-                    defaultValue={false}
-                    rules={{ required: true }}
-                    render={({ field: { onChange, value, name } }) => {
-                      return (
-                        <>
-                          <div className='flex align-items-center'>
-                            <Checkbox
-                              inputId='rememberme1'
-                              checked={value || false}
-                              onChange={onChange}
-                              className={classNames('mr-2 ', {
-                                'p-invalid': errors[name]
-                              })}
-                            />
-                            <label htmlFor='rememberme1'>Remember me</label>
-                          </div>
-                          <a
-                            className='font-medium no-underline ml-2 text-right cursor-pointer'
-                            style={{ color: 'var(--primary-color)' }}
-                          >
-                            Forgot password?
-                          </a>
-                        </>
-                      );
-                    }}
-                  />
-                ) : null}
-              </div>
               <Button
                 type='submit'
                 label={type === 'login' ? 'Sign In' : 'Resgister'}

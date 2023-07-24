@@ -4,6 +4,7 @@ export enum AuthRoutesEnum {
   renew = '/auth/access-token'
 }
 export enum ApiRoutesEnum {
+  user = 'user',
   crud = '/crud',
   empty = '/empty',
   notFound = '/notfound',
