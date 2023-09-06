@@ -11,8 +11,8 @@ import { Table } from './common';
 
 interface CrudProps<T extends DataTableValue> extends DataTableProps<any> {
   header: JSX.Element;
-  leftToolbar: JSX.Element;
-  rightToolbar: JSX.Element;
+  leftToolbar?: JSX.Element;
+  rightToolbar?: JSX.Element;
   data: T[];
   onSelected: (e: DataTableSelectionChangeEvent<any>) => void;
   columnData: ColumnProps[];
@@ -34,7 +34,9 @@ function Crud<T extends DataTableValue>({
       <div className='col-12'>
         <div className='card'>
           <Toast ref={toast} />
-          <Toolbar className='mb-4' left={leftToolbar} right={rightToolbar} />
+          {(leftToolbar || rightToolbar) && (
+            <Toolbar className='mb-4' left={leftToolbar} right={rightToolbar} />
+          )}
           <Table
             value={data}
             selection={selection}

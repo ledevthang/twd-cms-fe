@@ -25,7 +25,7 @@ const router = createBrowserRouter(
         element={
           <>
             <AppLayout />
-            <Navigate to={ApiRoutesEnum.user} replace={true} />
+            <Navigate to={ApiRoutesEnum.crud} replace={true} />
           </>
         }
       >
