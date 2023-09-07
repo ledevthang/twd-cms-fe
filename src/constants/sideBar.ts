@@ -10,25 +10,5 @@ export const model: AppMenuItem[] = [
       },
     ]
   },
-  // {
-  //   label: 'Menu 2',
-  //   icon: 'pi pi-fw pi-briefcase',
-  //   items: [
-  //     {
-  //       label: 'Not Found',
-  //       icon: 'pi pi-fw pi-exclamation-circle',
-  //       to: '/notfound'
-  //     },
-  //     {
-  //       label: 'Empty',
-  //       icon: 'pi pi-fw pi-circle-off',
-  //       to: '/empty'
-  //     },
-  //     {
-  //       label: 'Access Denied',
-  //       icon: 'pi pi-fw pi-lock',
-  //       to: '/access'
-  //     }
-  //   ]
-  // }
+  
 ];
