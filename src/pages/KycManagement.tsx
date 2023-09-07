@@ -11,8 +11,8 @@ import { statusOptions } from '@/constants/common';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKey } from '@/types/query';
 import { getKycUserList } from '@/services/kyc.service';
-import { isEmpty } from 'lodash';
 import { KycUserData } from '@/types/kyc';
+import dayjs from 'dayjs';
 
 function KycManagement() {
   const [selectedProducts, setSelectedProducts] = useState<Demo.Product[]>([]);
@@ -103,17 +103,24 @@ function KycManagement() {
       {
         field: 'user.displayName',
         header: 'User Name',
-        sortable: true
+        sortable: true,
+        className: 'text-black'
       },
       {
         field: 'risk',
         header: 'Risk',
-        sortable: true
+        sortable: true,
+        className: 'text-black'
       },
       {
         field: 'submittedAt',
         header: 'Date of submission',
-        sortable: true
+        sortable: true,
+        body: (rowData: KycUserData) => (
+          <span className='text-black'>
+            {dayjs(rowData.updatedAt).format('DD/MM/YYYY')}
+          </span>
+        )
       },
       {
         field: 'status',
@@ -130,7 +137,6 @@ function KycManagement() {
     },
     []
   );
-  if (isEmpty(data?.data)) return;
   return (
     <Crud
       data={data?.data as KycUserData[]}

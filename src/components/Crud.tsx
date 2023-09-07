@@ -9,6 +9,7 @@ import { Toolbar } from 'primereact/toolbar';
 import { Table } from './common';
 import { KycUserData } from '@/types/kyc';
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
+import { defaultPageSize } from '@/constants/common';
 
 interface CrudProps extends DataTableProps<any> {
   header: JSX.Element;
@@ -20,6 +21,7 @@ interface CrudProps extends DataTableProps<any> {
   totalElement?: number;
   setPage?: (v: number) => void;
   currentPage?: number;
+  pageSize?: number;
 }
 function Crud({
   data,
@@ -31,7 +33,8 @@ function Crud({
   columnData,
   onSelected,
   setPage,
-  totalElement
+  totalElement,
+  pageSize = defaultPageSize
 }: CrudProps) {
   const toast = useRef<Toast>(null);
   const [first, setFirst] = useState(0);
@@ -59,14 +62,13 @@ function Crud({
             header={header}
             responsiveLayout='scroll'
             column={columnData}
-            rows={10}
+            rows={pageSize}
           />
           <Paginator
             first={first}
-            rows={10}
+            rows={pageSize}
             totalRecords={totalElement}
             onPageChange={onPageChange}
-            currentPageReportTemplate='Showing {first} to {last} of {totalRecords} products'
           />
         </div>
       </div>
