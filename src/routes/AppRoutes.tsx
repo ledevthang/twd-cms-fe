@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { ApiRoutesEnum } from '@/types/routes.enum';
 import ErrorPage from '@/pages/ErrorPage';
-import CrudPage from '@/pages/CrudPage';
+import KycManagement from '@/pages/KycManagement';
 import EmptyPage from '@/pages/EmptyPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import { AppLayout } from '@/layout';
@@ -25,12 +25,12 @@ const router = createBrowserRouter(
         element={
           <>
             <AppLayout />
-            <Navigate to={ApiRoutesEnum.crud} replace={true} />
+            <Navigate to={ApiRoutesEnum.kycManagement} replace={true} />
           </>
         }
       >
         <Route path={ApiRoutesEnum.user} element={<UserPage />} />
-        <Route path={ApiRoutesEnum.crud} element={<CrudPage />} />
+        <Route path={ApiRoutesEnum.kycManagement} element={<KycManagement />} />
         <Route path={ApiRoutesEnum.table} element={<DataTable />} />
         <Route path={ApiRoutesEnum.chart} element={<ChartPage />} />
         <Route path={ApiRoutesEnum.notFound} element={<NotFoundPage />} />

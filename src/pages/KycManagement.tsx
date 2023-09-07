@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { ProductService } from '@/_mock/service/ProductService';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Crud } from '@/components';
 import { Demo } from '@/types/demo';
 import { ColumnProps } from 'primereact/column';
@@ -9,14 +8,29 @@ import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
 import { statusOptions } from '@/constants/common';
+import { useQuery } from '@tanstack/react-query';
+import { QueryKey } from '@/types/query';
+import { getKycUserList } from '@/services/kyc.service';
+import { isEmpty } from 'lodash';
+import { KycUserData } from '@/types/kyc';
 
-function CrudPage() {
-  const [products, setProducts] = useState<Demo.Product[]>([]);
+function KycManagement() {
   const [selectedProducts, setSelectedProducts] = useState<Demo.Product[]>([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('');
   const [startDate] = useState(null);
   const [endDate] = useState(null);
+  const [page, setPage] = useState(1);
+
+  const { data } = useQuery({
+    queryKey: [QueryKey.KycUserList, { page }],
+    queryFn: () =>
+      getKycUserList({
+        page: page,
+        size: 10
+      })
+  });
+
   const options = useMemo(
     () => [
       {
@@ -34,6 +48,7 @@ function CrudPage() {
     ],
     []
   );
+
   const header = useMemo(() => {
     return (
       <div className='flex flex-column md:flex-row md:justify-content-between md:align-items-center'>
@@ -66,16 +81,16 @@ function CrudPage() {
   }, [setSelectedStatus, selectedStatus, startDate, endDate]);
 
   const statusBodyTemplate = useCallback(
-    (rowData: Demo.Product) => {
+    (rowData: KycUserData) => {
       return (
         <>
           <Dropdown
-            value={rowData.inventoryStatus}
+            value={rowData.status}
             options={options}
             optionLabel='name'
             className='w-full md:w-14rem'
-            placeholder={rowData.inventoryStatus || ''}
-            defaultValue={rowData.inventoryStatus}
+            placeholder={rowData.status || ''}
+            defaultValue={rowData.status}
           />
         </>
       );
@@ -86,22 +101,22 @@ function CrudPage() {
   const column: ColumnProps[] = useMemo(() => {
     return [
       {
-        field: 'name',
+        field: 'user.displayName',
         header: 'User Name',
         sortable: true
       },
       {
-        field: 'quantity',
+        field: 'risk',
         header: 'Risk',
         sortable: true
       },
       {
-        field: 'description',
+        field: 'submittedAt',
         header: 'Date of submission',
         sortable: true
       },
       {
-        field: 'inventoryStatus',
+        field: 'status',
         header: 'Status',
         body: statusBodyTemplate,
         sortable: true
@@ -115,23 +130,20 @@ function CrudPage() {
     },
     []
   );
-
-  useEffect(() => {
-    ProductService.getProducts().then(data => {
-      setProducts(data);
-    });
-  }, []);
-
+  if (isEmpty(data?.data)) return;
   return (
     <Crud
-      data={products}
+      data={data?.data as KycUserData[]}
       header={header}
       columnData={column}
       selection={selectedProducts}
       onSelected={handleSelectRow}
       globalFilter={globalFilter}
+      totalElement={data?.totalElement as number}
+      setPage={setPage}
+      currentPage={page}
     />
   );
 }
 
-export default CrudPage;
+export default KycManagement;

@@ -1,23 +1,27 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { ColumnProps } from 'primereact/column';
 import {
   DataTableProps,
-  DataTableSelectionChangeEvent,
-  DataTableValue
+  DataTableSelectionChangeEvent
 } from 'primereact/datatable';
 import { Toast } from 'primereact/toast';
 import { Toolbar } from 'primereact/toolbar';
 import { Table } from './common';
+import { KycUserData } from '@/types/kyc';
+import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 
-interface CrudProps<T extends DataTableValue> extends DataTableProps<any> {
+interface CrudProps extends DataTableProps<any> {
   header: JSX.Element;
   leftToolbar?: JSX.Element;
   rightToolbar?: JSX.Element;
-  data: T[];
+  data: KycUserData[];
   onSelected: (e: DataTableSelectionChangeEvent<any>) => void;
   columnData: ColumnProps[];
+  totalElement?: number;
+  setPage?: (v: number) => void;
+  currentPage?: number;
 }
-function Crud<T extends DataTableValue>({
+function Crud({
   data,
   header,
   leftToolbar,
@@ -25,9 +29,16 @@ function Crud<T extends DataTableValue>({
   globalFilter,
   selection,
   columnData,
-  onSelected
-}: CrudProps<T>) {
+  onSelected,
+  setPage,
+  totalElement
+}: CrudProps) {
   const toast = useRef<Toast>(null);
+  const [first, setFirst] = useState(0);
+  const onPageChange = (event: PaginatorPageChangeEvent) => {
+    setPage && setPage(event.page + 1);
+    setFirst(event.first);
+  };
 
   return (
     <div className='grid crud-demo'>
@@ -42,17 +53,20 @@ function Crud<T extends DataTableValue>({
             selection={selection}
             onSelectionChange={onSelected}
             dataKey='id'
-            paginator
-            rows={10}
-            rowsPerPageOptions={[5, 10, 25]}
             className='datatable-responsive'
-            paginatorTemplate='FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown'
-            currentPageReportTemplate='Showing {first} to {last} of {totalRecords} products'
             globalFilter={globalFilter}
             emptyMessage='No products found.'
             header={header}
             responsiveLayout='scroll'
             column={columnData}
+            rows={10}
+          />
+          <Paginator
+            first={first}
+            rows={10}
+            totalRecords={totalElement}
+            onPageChange={onPageChange}
+            currentPageReportTemplate='Showing {first} to {last} of {totalRecords} products'
           />
         </div>
       </div>

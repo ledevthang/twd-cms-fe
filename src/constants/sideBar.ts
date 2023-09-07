@@ -6,9 +6,8 @@ export const model: AppMenuItem[] = [
     items: [
       {
         label: 'KYC management',
-        to: '/crud'
-      },
+        to: '/kycManagement'
+      }
     ]
-  },
-  
+  }
 ];
