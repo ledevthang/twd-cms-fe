@@ -62,7 +62,7 @@ const Sign = ({ type }: SignProps) => {
   const onSubmit = useCallback(
     (data: LoginFormTypes) => {
       mutate({
-        username: data.username,
+        email: data.email,
         password: data.password
       });
     },
@@ -136,7 +136,7 @@ const Sign = ({ type }: SignProps) => {
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <Controller
-                name='username'
+                name='email'
                 control={control}
                 rules={{ required: 'Username is required.' }}
                 render={({ field: { onChange, value, name } }) => {
@@ -153,7 +153,7 @@ const Sign = ({ type }: SignProps) => {
                         type='text'
                         value={value}
                         onChange={onChange}
-                        placeholder='User name'
+                        placeholder='Email'
                         style={{ padding: '1rem' }}
                         className={classNames('w-full md:w-30rem ', {
                           'p-invalid': errors[name]
