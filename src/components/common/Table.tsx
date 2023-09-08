@@ -69,8 +69,8 @@ function Table({
             responsiveLayout='scroll'
             rows={pageSize}
           >
-            {columnData.map((props, index) => (
-              <Column key={index} {...props} />
+            {columnData.map((item, index) => (
+              <Column key={index} {...item} />
             ))}
           </DataTable>
 
