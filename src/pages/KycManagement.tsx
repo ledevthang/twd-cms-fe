@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { Crud } from '@/components';
 import { Demo } from '@/types/demo';
 import { ColumnProps } from 'primereact/column';
 import { DataTableSelectionChangeEvent } from 'primereact/datatable';
@@ -13,6 +12,7 @@ import { QueryKey } from '@/types/query';
 import { getKycUserList } from '@/services/kyc.service';
 import { KycUserData } from '@/types/kyc';
 import dayjs from 'dayjs';
+import Table from '@/components/common/Table';
 
 function KycManagement() {
   const [selectedProducts, setSelectedProducts] = useState<Demo.Product[]>([]);
@@ -118,7 +118,8 @@ function KycManagement() {
         sortable: true,
         body: (rowData: KycUserData) => (
           <span className='text-black'>
-            {dayjs(rowData.updatedAt).format('DD/MM/YYYY')}
+            {rowData.submittedAt &&
+              dayjs(rowData.submittedAt).format('DD/MM/YYYY')}
           </span>
         )
       },
@@ -138,7 +139,7 @@ function KycManagement() {
     []
   );
   return (
-    <Crud
+    <Table
       data={data?.data as KycUserData[]}
       header={header}
       columnData={column}
