@@ -10,5 +10,6 @@ export enum ApiRoutesEnum {
   notFound = '/notfound',
   chart = '/charts',
   accessDenied = '/access',
-  table = '/table'
+  table = '/table',
+  campaign= '/campaign'
 }

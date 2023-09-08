@@ -9,12 +9,12 @@ import { Dropdown } from 'primereact/dropdown';
 import { statusOptions } from '@/constants/common';
 import { useQuery } from '@tanstack/react-query';
 import { QueryKey } from '@/types/query';
-import { getKycUserList } from '@/services/user.service';
-import { KycUser } from '@/types/user';
 import Table from '@/components/common/Table';
+import { getCampaignList } from '@/services/campaign.service';
+import { ICampaign } from '@/types/campaign';
 import { formatDate } from '@/utils/date';
 
-function KycManagement() {
+function CampaignManagement() {
   const [selectedProducts, setSelectedProducts] = useState<Demo.Product[]>([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('');
@@ -23,31 +23,13 @@ function KycManagement() {
   const [page, setPage] = useState(1);
 
   const { data } = useQuery({
-    queryKey: [QueryKey.KycUserList, { page }],
+    queryKey: [QueryKey.CampaignList, { page }],
     queryFn: () =>
-      getKycUserList({
+      getCampaignList({
         page: page,
         size: 10
       })
   });
-
-  const options = useMemo(
-    () => [
-      {
-        name: 'Pendding',
-        code: 'pendding'
-      },
-      {
-        name: 'Approved',
-        code: 'approved'
-      },
-      {
-        name: 'Rejected',
-        code: 'rejected'
-      }
-    ],
-    []
-  );
 
   const header = useMemo(() => {
     return (
@@ -80,56 +62,64 @@ function KycManagement() {
     );
   }, [setSelectedStatus, selectedStatus, startDate, endDate]);
 
-  const statusBodyTemplate = useCallback(
-    (rowData: KycUser) => {
-      return (
-        <>
-          <Dropdown
-            value={rowData.status}
-            options={options}
-            optionLabel='name'
-            className='w-full md:w-14rem'
-            placeholder={rowData.status || ''}
-            defaultValue={rowData.status}
-          />
-        </>
-      );
-    },
-    [options]
-  );
-
   const column: ColumnProps[] = useMemo(() => {
     return [
       {
-        field: 'user.displayName',
-        header: 'User Name',
+        field: 'title',
+        header: 'Campaign',
         sortable: true,
         className: 'text-black'
       },
       {
-        field: 'risk',
-        header: 'Risk',
+        field: 'startAt',
+        header: 'Created date',
         sortable: true,
-        className: 'text-black'
-      },
-      {
-        field: 'submittedAt',
-        header: 'Date of submission',
-        sortable: true,
-        body: (rowData: KycUser) => (
+        className: 'text-black',
+        body: (rowData: ICampaign) => (
           <span className='text-black'>
-            {rowData.submittedAt && formatDate(rowData.submittedAt)}
+            {rowData.startAt && formatDate(rowData.endAt)}
           </span>
         )
       },
       {
+        field: 'submittedAt',
+        header: 'Deadline',
+        sortable: true,
+        body: (rowData: ICampaign) => (
+          <span className='text-black'>
+            {rowData.endAt && formatDate(rowData.endAt)}
+          </span>
+        )
+      },
+      {
+        field: 'progress',
+        header: 'Progress',
+        sortable: true
+      },
+      {
+        field: 'goal',
+        header: 'Goal',
+        sortable: true
+      },
+      {
+        field: 'investor',
+        header: 'Backers',
+        sortable: true
+      },
+      {
         field: 'status',
         header: 'Status',
-        body: statusBodyTemplate,
-        sortable: true
+        sortable: true,
+        body: (rowData: ICampaign) => (
+          <span className='text-black'>{rowData.status}</span>
+        )
+      },
+      {
+        field: 'submittedAt',
+        header: 'action'
       }
     ];
-  }, [statusBodyTemplate]);
+  }, []);
 
   const handleSelectRow = useCallback(
     (e: DataTableSelectionChangeEvent<any>) => {
@@ -139,7 +129,7 @@ function KycManagement() {
   );
   return (
     <Table
-      data={data?.data as KycUser[]}
+      data={data?.data as ICampaign[]}
       header={header}
       columnData={column}
       selection={selectedProducts}
@@ -152,4 +142,4 @@ function KycManagement() {
   );
 }
 
-export default KycManagement;
+export default CampaignManagement;

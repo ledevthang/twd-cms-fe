@@ -1,7 +1,6 @@
-export const formatDate = (value: Date) => {
-  return value.toLocaleDateString('en-US', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-  });
-};
+import { DATE_FORMAT } from "@/constants/common";
+import dayjs from "dayjs";
+
+export const formatDate = (value: Date, formatType=DATE_FORMAT) => dayjs(value).format(formatType)
+
+

@@ -15,7 +15,7 @@ import { AppLayout } from '@/layout';
 import ChartPage from '@/pages/Charts';
 import AccessDeniedPage from '@/pages/AccessDenied';
 import DataTable from '@/pages/DataTable';
-import UserPage from '@/pages/UserPage';
+import CampaignManagement from '@/pages/CampaignManagement';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,7 +29,7 @@ const router = createBrowserRouter(
           </>
         }
       >
-        <Route path={ApiRoutesEnum.user} element={<UserPage />} />
+        <Route path={ApiRoutesEnum.campaign} element={<CampaignManagement />} />
         <Route path={ApiRoutesEnum.kycManagement} element={<KycManagement />} />
         <Route path={ApiRoutesEnum.table} element={<DataTable />} />
         <Route path={ApiRoutesEnum.chart} element={<ChartPage />} />

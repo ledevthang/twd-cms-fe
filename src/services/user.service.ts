@@ -1,9 +1,6 @@
 import AXIOS from './axios';
-import { Data, PaginationTypes } from '@/types/common';
-import { UserTypes } from '@/types/user';
+import { IKycUserResponseParams, IKycUserResponse } from '@/types/user';
 
-export function getUsers(params: PaginationTypes): Promise<Data<UserTypes>> {
-  return AXIOS.get('/users', {
-    params
-  });
+export function getKycUserList(payload: IKycUserResponseParams): Promise<IKycUserResponse> {
+  return AXIOS.get(`kyc?page=${payload.page}&size=${payload.size}`);
 }
