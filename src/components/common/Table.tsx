@@ -7,7 +7,7 @@ import {
 } from 'primereact/datatable';
 import { Toast } from 'primereact/toast';
 import { Toolbar } from 'primereact/toolbar';
-import { KycUserData } from '@/types/kyc';
+import { KycUser } from '@/types/kyc';
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 import { defaultPageSize } from '@/constants/common';
 
@@ -15,7 +15,7 @@ interface TableProps extends DataTableProps<any> {
   header: JSX.Element;
   leftToolbar?: JSX.Element;
   rightToolbar?: JSX.Element;
-  data: KycUserData[];
+  data: KycUser[];
   onSelected: (e: DataTableSelectionChangeEvent<any>) => void;
   columnData: ColumnProps[];
   totalElement?: number;

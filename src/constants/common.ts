@@ -14,3 +14,5 @@ export const statusOptions = [
 ];
 
 export const defaultPageSize = 10;
+
+export const DATE_FORMAT ="DD/MM/YYYY"

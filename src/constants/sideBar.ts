@@ -9,5 +9,14 @@ export const model: AppMenuItem[] = [
         to: '/kycManagement'
       }
     ]
+  },
+  {
+    label: 'Campaign management',
+    items: [
+      {
+        label: 'Campaign management',
+        to: '/campaign'
+      }
+    ]
   }
 ];

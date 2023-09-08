@@ -1,3 +1,4 @@
 export enum QueryKey {
-  KycUserList = 'kycUserList'
+  KycUserList = 'kycUserList',
+  CampaignList = 'campaignList'
 }
