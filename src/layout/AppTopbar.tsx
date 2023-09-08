@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useRef } from 'react';
 import { classNames } from 'primereact/utils';
 
-import reactLogo from '@/assets/react.svg';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 import { LayoutContext } from '@/context/layoutcontext';
@@ -36,8 +35,7 @@ const AppTopbar = () => {
   return (
     <div className='layout-topbar'>
       <a href='/' className='layout-topbar-logo'>
-        <img src={reactLogo} width='47.22px' height={'35px'} alt='logo' />
-        <span>Dashboard</span>
+        <span>CROWDFUNDING</span>
       </a>
 
       <button
@@ -58,7 +56,6 @@ const AppTopbar = () => {
           <i className='pi pi-user'></i>
           <span>Profile</span>
         </button>
-
         <Menu model={items} popup ref={menuLeft} popupAlignment='right' />
       </div>
     </div>

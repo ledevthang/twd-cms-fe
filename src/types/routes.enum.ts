@@ -5,7 +5,7 @@ export enum AuthRoutesEnum {
 }
 export enum ApiRoutesEnum {
   user = 'user',
-  crud = '/crud',
+  kycManagement = '/kycManagement',
   empty = '/empty',
   notFound = '/notfound',
   chart = '/charts',
